@@ -11,7 +11,7 @@ app.all('/', function(req, res, next) {
 });
 
 var config = {
-    appRoot: __dirname // required config
+    appRoot: __dirname
 };
 
 SwaggerExpress.create(config, function(err, swaggerExpress){
@@ -20,15 +20,22 @@ SwaggerExpress.create(config, function(err, swaggerExpress){
         throw err;
     }
 
-
-    // install middleware
     app.use(SwaggerUi(swaggerExpress.runner.swagger));
     swaggerExpress.register(app);
+
+    app.get('*', function(req, res, next){
+        next({statusCode: 404, message: 'End point does not exist: ' + req.url})
+    });
+
+    app.use(function(err, req, res, next){
+        res.statusCode = err.statusCode;
+        res.json({error: err.message});
+    });
 
     var port = process.env.PORT || 10010;
     app.listen(port);
 
-    console.log('app running')
+    console.log('app running on port ' + port);
 
     // if(swaggerExpress.runner.swagger.paths['/hello']){
     //     console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
