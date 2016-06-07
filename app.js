@@ -24,7 +24,12 @@ SwaggerExpress.create(config, function(err, swaggerExpress){
     swaggerExpress.register(app);
 
     app.get('*', function(req, res, next){
-        next({statusCode: 404, message: 'End point does not exist: ' + req.url})
+
+        if(res.statusCode === 200){
+            return next({statusCode: 404, message: 'End point not found: ' + req.url})
+        }
+
+        next();
     });
 
     app.use(function(err, req, res, next){
