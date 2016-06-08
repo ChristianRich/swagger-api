@@ -1,6 +1,13 @@
-var app = require('express')()
+var express = require('express')
     , SwaggerExpress = require('swagger-express-mw')
-    , SwaggerUi = require('swagger-tools/middleware/swagger-ui');
+    , SwaggerUi = require('swagger-tools/middleware/swagger-ui')
+    , https = require('https')
+    , fs = require('fs')
+    , httpsPort = 3443
+    , httpPort = process.env.PORT || 10010
+    , enableHttps = false;
+
+var app = express({});
 
 app.all('/', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,10 +44,33 @@ SwaggerExpress.create(config, function(err, swaggerExpress){
         res.json({error: err.message});
     });
 
-    var port = process.env.PORT || 10010;
-    app.listen(port);
+    if(enableHttps){
 
-    console.log('app running on port ' + port);
+        app.all('*', function(req, res, next){
+
+            if(req.secure){
+                return next();
+            }
+
+            res.redirect('https://' + req.hostname + ':' + app.get('port_https') + req.url);
+        });
+
+        var options = {
+            key: fs.readFileSync('./ssl/private.key'),
+            cert: fs.readFileSync('./ssl/certificate.pem')
+        };
+
+        var secureServer = https.createServer(options, app).listen(httpsPort, function(){
+            console.log('app running on secure server https port ' + httpsPort);
+        });
+    }
+
+    else{
+
+        app.listen(httpPort, function(){
+            console.log('app running on port ' + httpPort);
+        });
+    }
 
     // if(swaggerExpress.runner.swagger.paths['/hello']){
     //     console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
