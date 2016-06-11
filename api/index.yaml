@@ -1,0 +1,23 @@
+swagger: '2.0'
+info:
+  $ref: ./api/info/index.yaml
+
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths
+basePath: /
+
+schemes:
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+
+paths:
+  $ref: ./api/paths/index.yaml
+definitions:
+  $ref: ./api/definitions/index.yaml

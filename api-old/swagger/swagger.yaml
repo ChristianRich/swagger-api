@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: NIO API
+
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+
+schemes:
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /ping:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ping
+    get:
+      description: API heartbeat
+      # used as the method name of the controller
+#      operationId: hello # Used to specify a named controller. I prefer using http verbs intead so leave this one out
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ping"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/errorResponse"
+
+#  /getCustomer:
+#    x-swagger-router-controller: getCustomer
+#    get:
+#      description: Returns a custumer from an Id
+#      parameters:
+#        - name: id
+#          in: query
+#          description: The id of the customer
+#          required: true
+#          type: string
+#      responses:
+#        "200":
+#          description: Success
+#          schema:
+#            $ref: "#/definitions/GetCustomer"
+#        default:
+#          description: Error
+#          schema:
+#            $ref: "#/definitions/ErrorResponse"
+#
+#  /retrieveQuote:
+#      x-swagger-router-controller: getCustomer
+#      get:
+#        description: Retrieves a quote
+#        parameters:
+#          - name: id
+#            in: query
+#            description: The id of quote
+#            required: true
+#            type: string
+#        responses:
+#          "200":
+#            description: Success
+#            schema:
+#              $ref: "#/definitions/GetCustomer"
+#          default:
+#            description: Error
+#            schema:
+#              $ref: "#/definitions/ErrorResponse"
+#
+#  /saveQuote:
+#      x-swagger-router-controller: getCustomer
+#      post:
+#        description: Save a quote
+#        parameters:
+#          - name: id
+#            in: query
+#            description: The id of quote
+#            required: true
+#            type: string
+#        responses:
+#          "200":
+#            description: Success
+#            schema:
+#              $ref: "#/definitions/GetCustomer"
+#          default:
+#            description: Error
+#            schema:
+#              $ref: "#/definitions/ErrorResponse"
+
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+
+definitions:
+  ping:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+
+  getCustomer:
+    type: "object"
+    required:
+      - "firstName"
+    properties:
+      firstName:
+        type: "string"
+
+  errorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+

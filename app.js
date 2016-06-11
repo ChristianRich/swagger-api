@@ -66,7 +66,6 @@ SwaggerExpress.create(config, function(err, swaggerExpress){
     }
 
     else{
-
         app.listen(httpPort, function(){
             console.log('app running on port ' + httpPort);
         });

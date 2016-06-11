@@ -1,0 +1,19 @@
+x-swagger-router-controller: retrieveQuote
+get:
+  description: Retrieve a quote by id
+  parameters:
+  - name: id
+    in: query
+    description: The id of the quote
+    required: true
+    type: string
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "#/definitions/Object"
+    # responses may fall through to errors
+#    default:
+#      description: Error
+#      schema:
+#        $ref: "#/definitions/errorResponse"

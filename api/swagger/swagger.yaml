@@ -1,85 +1,60 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "0.0.1"
-  title: NIO API
-# during dev, should point to your local machine
-host: localhost:10010
-# basePath prefixes all resource paths 
+  version: 1.0.0
+  title: 'NIO API'
+host: 'localhost:10010'
 basePath: /
-# 
 schemes:
-  # tip: remove http to make production-grade
   - http
   - https
-# format of bodies a client can send (Content-Type)
 consumes:
   - application/json
-# format of the responses to the client (Accepts)
 produces:
   - application/json
 paths:
   /ping:
-    # binds a127 app logic to a route
     x-swagger-router-controller: ping
     get:
-      description: API heartbeat
-      # used as the method name of the controller
-#      operationId: hello # Used to specify a named controller. I prefer using http verbs intead so leave this one out
       responses:
-        "200":
-          description: Success
+        '200':
+          description: OK
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/Ping"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-
-  /getCustomer:
-    x-swagger-router-controller: getCustomer
+            $ref: '#/definitions/Object'
+  /retrieveQuote:
+    x-swagger-router-controller: retrieveQuote
     get:
-      description: Returns a custumer from an Id
+      description: 'Retrieve a quote by id'
       parameters:
-        - name: id
+        -
+          name: id
           in: query
-          description: The id of the customer
+          description: 'The id of the quote'
           required: true
           type: string
       responses:
-        "200":
+        '200':
           description: Success
           schema:
-            $ref: "#/definitions/GetCustomer"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-
-  /swagger:
-    x-swagger-pipe: swagger_raw
-
-# complex objects have schema definitions
+            $ref: '#/definitions/Object'
 definitions:
-  Ping:
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+  Customer:
+    type: object
+    properties:
+      name:
+        type: string
+  Message:
     required:
       - message
     properties:
       message:
         type: string
-
-  GetCustomer:
-    type: "object"
-    required:
-      - "firstName"
+  Object:
+    type: object
     properties:
-      firstName:
-        type: "string"
-
-  ErrorResponse:
-    required:
-      - message
-    properties:
-      message:
+      name:
         type: string

@@ -1,0 +1,5 @@
+/ping:
+  $ref: ./ping.yaml
+/retrieveQuote:
+  $ref: ./retrieveQuote.yaml
+

@@ -1,0 +1,5 @@
+# Generic object without any requirements to structure or contained fields
+type: object
+properties:
+  name:
+    type: string

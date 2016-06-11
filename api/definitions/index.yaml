@@ -1,0 +1,11 @@
+User:
+  $ref: ./user.yaml
+
+Customer:
+  $ref: ./customer.yaml
+
+Message:
+  $ref: ./message.yaml
+
+Object:
+  $ref: ./object.yaml
