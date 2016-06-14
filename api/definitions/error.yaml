@@ -1,0 +1,11 @@
+# Generic object without any requirements to structure or fields
+type: object
+required:
+  - code
+  - message
+properties:
+  code:
+    type: integer
+    format: int32
+  message:
+    type: string

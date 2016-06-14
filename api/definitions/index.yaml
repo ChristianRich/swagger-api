@@ -3,3 +3,6 @@ Message:
 
 Object:
   $ref: ./object.yaml
+
+Error:
+  $ref: ./error.yaml

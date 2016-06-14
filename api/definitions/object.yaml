@@ -1,5 +1,3 @@
-# Generic object without any requirements to structure or contained fields
+# Generic object without any requirements to structure or fields for testing purposes.
+# Should not be used in a production system, rather use descriptive and detailed definitions
 type: object
-properties:
-  name:
-    type: string

@@ -20,10 +20,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
   /retrieveQuote:
-    x-swagger-router-controller: retrieveQuote
+    x-swagger-router-controller: noop
     get:
-      description: 'Retrieve a quote by id'
+      description: 'Retrieve quote by id'
       parameters:
         -
           name: id
@@ -36,6 +40,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Object'
+  /saveQuote:
+    x-swagger-router-controller: noop
+    post:
+      description: 'Save quote'
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'The id of the quote'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Object'
+  /validateAddress:
+    x-swagger-router-controller: ping
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
 definitions:
   Message:
     required:
@@ -45,6 +73,14 @@ definitions:
         type: string
   Object:
     type: object
+  Error:
+    type: object
+    required:
+      - code
+      - message
     properties:
-      name:
+      code:
+        type: integer
+        format: int32
+      message:
         type: string

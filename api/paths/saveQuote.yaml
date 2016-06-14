@@ -1,6 +1,6 @@
 x-swagger-router-controller: noop
-get:
-  description: Retrieve quote by id
+post:
+  description: Save quote
   parameters:
   - name: id
     in: query

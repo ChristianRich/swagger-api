@@ -5,7 +5,3 @@ get:
       description: OK
       schema:
         $ref: '#/definitions/Object'
-    default:
-      description: Error
-      schema:
-        $ref: "#/definitions/Error"

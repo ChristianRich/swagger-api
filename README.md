@@ -1,4 +1,26 @@
-# Skeleton project for Swagger
+# NIO API
+
+New Insurance Offer API
+
+## How to run
+npm install -g swagger-node  
+npm install -g grunt  
+npm install -g mocha  
+npm install -g pm2  
+npm install  
+
+Start the app:  
+
+Development:  
+`gulp`
+
+Production or UAT:  
+`pm2 start api --name NIO API`    
+
+## Test
+`mocha`
+
+## Useful links
 http://robferguson.org/2015/06/06/build-your-microservices-api-with-swagger/
 https://github.com/swagger-api/swagger-node
 
@@ -18,3 +40,14 @@ https://stackoverflow.com/questions/26206685/how-can-i-describe-complex-json-mod
 Swagger build refs. Concatenates the swagger.yaml and it's references into a new file 
 https://github.com/ex-nerd/swagger-example/blob/master/build-via-json-refs.js
 http://azimi.me/2015/07/16/split-swagger-into-smaller-files.html
+
+Error definition:
+https://github.com/OAI/OpenAPI-Specification/blob/master/fixtures/v2.0/json/resources/resourceWithLinkedDefinitions.json#L49
+
+Split into smaller files:
+http://azimi.me/2015/07/16/split-swagger-into-smaller-files.html
+https://github.com/mohsen1/multi-file-swagger-example
+
+Swagger node:
+https://github.com/swagger-api/swagger-node
+

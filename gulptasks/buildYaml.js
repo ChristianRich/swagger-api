@@ -6,7 +6,7 @@ var gulp = require('gulp')
     , root = YAML.load(fs.readFileSync('./api/index.yaml').toString());
 
 var options = {
-    filter        : ['relative', 'remote'],
+    filter: ['relative', 'remote'],
     loaderOptions : {
         processContent : function (res, callback) {
             callback(null, YAML.load(res.text));
@@ -14,14 +14,19 @@ var options = {
     }
 };
 
-resolve(root, options).then(function (results) {
+gulp.task('build:yaml', function(callback){
 
-    var yaml = toYaml.stringify(results.resolved, 8, 2);
+    resolve(root, options).then(function (results){
 
-    fs.writeFile('./api/swagger/swagger.yaml', yaml, function(err){
+        var yaml = toYaml.stringify(results.resolved, 8, 2);
 
-        if(err){
-            throw err;
-        }
+        fs.writeFile('./api/swagger/swagger.yaml', yaml, function(err){
+
+            if(err){
+                return callback(err);
+            }
+
+            callback();
+        });
     });
 });

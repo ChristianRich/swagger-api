@@ -2,4 +2,8 @@
   $ref: ./ping.yaml
 /retrieveQuote:
   $ref: ./retrieveQuote.yaml
+/saveQuote:
+  $ref: ./saveQuote.yaml
+/validateAddress:
+  $ref: ./validateAddress.yaml
 
