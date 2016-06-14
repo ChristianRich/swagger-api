@@ -1,2 +1,6 @@
-version: 1.0.0
 title: NIO API
+version: 1.0.0
+description: New Insurance Offer API
+contact:
+  name: AMP
+  email: christian_rich@amp.com.au

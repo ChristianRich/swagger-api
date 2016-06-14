@@ -8,12 +8,11 @@ get:
     required: true
     type: string
   responses:
-    "200":
+    200:
       description: Success
       schema:
         $ref: "#/definitions/Object"
-    # responses may fall through to errors
-#    default:
-#      description: Error
-#      schema:
-#        $ref: "#/definitions/errorResponse"
+    default:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"

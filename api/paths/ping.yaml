@@ -1,11 +1,27 @@
 x-swagger-router-controller: ping
 get:
+  description: API heartbeat
+  parameters:
+  - name: version
+    in: query # query, header, path, formData, body
+    type: integer # string, number, integer, boolean, array or file
+    enum: [1]
+    description: Endpoint version
+    required: false
+
+  - name: api_key
+    in: query
+    type: string
+    description: API key
+    required: true
+    allowEmptyValue: false
+
   responses:
     200:
       description: OK
       schema:
         $ref: '#/definitions/Object'
-    default:
-      description: Error
-      schema:
-        $ref: "#/definitions/Error"
+#    default:
+#      description: Error
+#      schema:
+#        $ref: "#/definitions/Error"

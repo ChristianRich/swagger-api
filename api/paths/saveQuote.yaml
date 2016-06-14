@@ -2,18 +2,24 @@ x-swagger-router-controller: noop
 post:
   description: Save quote
   parameters:
-  - name: id
+  - name: firstName
     in: query
-    description: The id of the quote
+    description: Customer's first name
+    required: true
+    type: string
+  - name: lastName
+    in: query
+    description: Customer's last name
     required: true
     type: string
   responses:
-    "200":
+    200:
       description: Success
       schema:
         $ref: "#/definitions/Object"
-    # responses may fall through to errors
-#    default:
-#      description: Error
-#      schema:
-#        $ref: "#/definitions/errorResponse"
+    204:
+      description: No data
+    default:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"

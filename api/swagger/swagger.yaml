@@ -1,9 +1,18 @@
 swagger: '2.0'
 info:
-  version: 1.0.0
   title: 'NIO API'
+  version: 1.0.0
+  description: 'New Insurance Offer API'
+  contact:
+    name: AMP
+    email: christian_rich@amp.com.au
 host: 'localhost:10010'
-basePath: /
+basePath: /api
+securityDefinitions:
+  key:
+    type: apiKey
+    in: query
+    name: api_key
 schemes:
   - http
   - https
@@ -15,15 +24,28 @@ paths:
   /ping:
     x-swagger-router-controller: ping
     get:
+      description: 'API heartbeat'
+      parameters:
+        -
+          name: version
+          in: query
+          type: integer
+          enum:
+            - 1
+          description: 'Endpoint version'
+          required: false
+        -
+          name: api_key
+          in: query
+          type: string
+          description: 'API key'
+          required: true
+          allowEmptyValue: false
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Object'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/Error'
   /retrieveQuote:
     x-swagger-router-controller: noop
     get:
@@ -40,15 +62,25 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Object'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
   /saveQuote:
     x-swagger-router-controller: noop
     post:
       description: 'Save quote'
       parameters:
         -
-          name: id
+          name: firstName
           in: query
-          description: 'The id of the quote'
+          description: 'Customer''s first name'
+          required: true
+          type: string
+        -
+          name: lastName
+          in: query
+          description: 'Customer''s last name'
           required: true
           type: string
       responses:
@@ -56,6 +88,12 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/Object'
+        '204':
+          description: 'No data'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
   /validateAddress:
     x-swagger-router-controller: ping
     get:
@@ -64,6 +102,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
   Message:
     required:

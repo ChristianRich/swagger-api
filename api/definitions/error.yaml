@@ -1,4 +1,3 @@
-# Generic object without any requirements to structure or fields
 type: object
 required:
   - code

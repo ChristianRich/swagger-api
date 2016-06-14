@@ -1,4 +1,3 @@
-# This file is
 swagger: '2.0'
 info:
   $ref: ./api/info/index.yaml
@@ -6,7 +5,17 @@ info:
 # during dev, should point to your local machine
 host: localhost:10010
 # basePath prefixes all resource paths
-basePath: /
+basePath: /api
+
+securityDefinitions:
+  key:
+    type: apiKey
+    in: query
+    name: api_key
+#  value:
+#    type: apiKey
+#    in: header
+#    name: value
 
 schemes:
   - http

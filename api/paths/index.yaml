@@ -6,4 +6,3 @@
   $ref: ./saveQuote.yaml
 /validateAddress:
   $ref: ./validateAddress.yaml
-

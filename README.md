@@ -51,3 +51,7 @@ https://github.com/mohsen1/multi-file-swagger-example
 Swagger node:
 https://github.com/swagger-api/swagger-node
 
+Swagger fields:
+https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
+
+
