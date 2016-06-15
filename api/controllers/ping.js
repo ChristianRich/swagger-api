@@ -1,5 +1,4 @@
-var Responder = require('../../server/restfulAPI')
-    , instance;
+var Responder = require('../../server/restfulAPI');
 
 var Ping = function(){
 };
@@ -13,8 +12,8 @@ Ping.prototype = {
     }
 };
 
-instance = new Ping();
+var ping = new Ping();
 
 module.exports = {
-    get: instance.get
+    get: ping.get
 };

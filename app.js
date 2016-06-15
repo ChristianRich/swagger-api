@@ -1,10 +1,9 @@
 var express = require('express')
     , SwaggerExpress = require('swagger-express-mw')
-    , SwaggerUi = require('swagger-tools/middleware/swagger-ui')
     , https = require('https')
     , fs = require('fs')
     , url = require('url')
-    , _ = require('lodash')
+    , middleware = require('./middleware/index')
     , httpsPort = 3443
     , httpPort = process.env.PORT || 10010
     , enableHttps = false;
@@ -29,50 +28,22 @@ SwaggerExpress.create(config, function(err, swaggerExpress){
         throw err;
     }
 
-    // Enforce API key on all endpoint routes
-    app.use('/api/', function(req, res, next){
-
-        var apiKey = url.parse(req.url, true).query['api_key'],
-            e;
-        
-        if(!apiKey || String(apiKey).length === 0 || _.isUndefined(apiKey)){
-            e = new Error('Unauthorized request: Missing api_key');
-            e.statusCode = 403;
-        }
-
-        else if(apiKey !== '1234'){
-            e = new Error('Unauthorized request: Invalid api_key');
-            e.statusCode = 403;
-        }
-
-        if(e){
-            res.statusCode =   e.statusCode;
-
-            return res.json({
-                statusCode: e.statusCode,
-                message: e.message
-            });
-        }
-
-        next();
-    });
-
-    app.use(SwaggerUi(swaggerExpress.runner.swagger));
+    new middleware(app, swaggerExpress);
     swaggerExpress.register(app);
 
-    app.get('*', function(req, res, next){
-
-        if(res.statusCode === 200){
-            return next({statusCode: 404, message: 'End point not found: ' + req.url})
-        }
-
-        next();
-    });
-
-    app.use(function(err, req, res, next){
-        res.statusCode = err.statusCode;
-        res.json({error: err.message});
-    });
+    // app.get('*', function(req, res, next){
+    //
+    //     if(res.statusCode === 200){
+    //         return next({statusCode: 404, message: 'End point not found: ' + req.url})
+    //     }
+    //
+    //     next();
+    // });
+    //
+    // app.use(function(err, req, res, next){
+    //     res.statusCode = err.statusCode;
+    //     res.json({error: err.message});
+    // });
 
     if(enableHttps){
 

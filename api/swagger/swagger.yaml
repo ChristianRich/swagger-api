@@ -34,13 +34,6 @@ paths:
             - 1
           description: 'Endpoint version'
           required: false
-        -
-          name: api_key
-          in: query
-          type: string
-          description: 'API key'
-          required: true
-          allowEmptyValue: false
       responses:
         '200':
           description: OK
@@ -97,6 +90,7 @@ paths:
   /validateAddress:
     x-swagger-router-controller: ping
     get:
+      description: 'Validated an adresss using Google Maps API'
       responses:
         '200':
           description: OK

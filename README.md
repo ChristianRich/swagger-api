@@ -4,9 +4,7 @@ New Insurance Offer API
 
 ## How to run
 npm install -g swagger-node  
-npm install -g grunt  
-npm install -g mocha  
-npm install -g pm2  
+
 npm install  
 
 Start the app:  

@@ -1,5 +1,6 @@
 x-swagger-router-controller: ping
 get:
+  description: Validated an adresss using Google Maps API
   responses:
     200:
       description: OK
